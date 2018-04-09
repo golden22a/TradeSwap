@@ -34,11 +34,10 @@ export default class App extends Component<Props> {
 
   render() {
     YellowBox.ignoreWarnings([
-  'Warning: componentWillMount is deprecated',
-  'Warning: componentWillReceiveProps is deprecated',
-  'Warning: isMounted(...) is deprecated',
-  'Remote debugger is in',
-
+      'Warning: componentWillMount is deprecated',
+      'Warning: componentWillReceiveProps is deprecated',
+      'Warning: isMounted(...) is deprecated',
+      'Remote debugger is in',
 ]);
     return (
       <View style={styles.container}>
@@ -72,10 +71,10 @@ export const Tabs=TabNavigator({
     }}
   },{
     tabBarPosition: 'bottom',
+    swipeEnabled: false,
     tabBarOptions: {
     activeTintColor: 'white',
     inactiveTintColor: 'black',
-
     labelStyle: {
       fontSize: 10,
     },
