@@ -47,6 +47,18 @@ export default class App extends Component<Props> {
     );
   }
 }
+export const LikeTab=TabNavigator({
+  Iliked:{
+    screen:Iliked
+  },
+  LikedMe:{
+    screen:LikedMe
+  },
+  Ipassed:{
+    screen:Ipassed
+  }
+
+})
 export const Tabs=TabNavigator({
   Main:{
     screen:Main,
@@ -54,7 +66,7 @@ export const Tabs=TabNavigator({
       label:'trades'
     }
   },
-  Explore:{screen:Explore,  NavigationOption:{
+  Explore:{screen:LikeTab,  NavigationOption:{
       label:'Explore',
 
     }},
