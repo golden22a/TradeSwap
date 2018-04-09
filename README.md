@@ -12,7 +12,7 @@ By: Abdelhalim Khaldi
 
 ## Data Model ERD
 
-![image of wireframe](https://github.com/golden22a/TradeSwap/tree/master/images “wireframe”)
+![image of wireframe](https://github.com/golden22a/TradeSwap/tree/master/images/tradeswap.png “wireframe”)
 
 ## MVP
 User login / SignUp
