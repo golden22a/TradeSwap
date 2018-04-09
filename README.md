@@ -11,7 +11,7 @@ By: Abdelhalim Khaldi
 2. Anyone who is looking to buy something.
 
 ## Data Model ERD
-[image of wireframe](images/tradewap.jpeg “wireframe”)
+![image of wireframe](images/tradewap.jpeg “wireframe”)
 
 ## MVP
 User login / SignUp
@@ -32,5 +32,12 @@ https://www.fluidui.com/editor/live/preview/cF9ScEJiM0I1VmtIWGNaWkhnS2ZGaVF0bjdI
 
 ## Springs
 
+#### Spring 1:
+-Learn about react native
+### Spring 2:
+-Setup a working environment on linux
+### Spring 3:
+- Create backend for basic auth
+- T
 
 
