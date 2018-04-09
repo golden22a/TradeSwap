@@ -15,6 +15,7 @@ import {
   YellowBox
 } from 'react-native';
 import Login from './component/Login';
+import Post from './component/Post';
 import Home from './component/Home';
 import Main from './component/MainContainer';
 import CardContainer from './component/CardContainer';
@@ -70,7 +71,7 @@ export const Tabs=TabNavigator({
       label:'Explore',
 
     }},
-  Profile:{screen:Profile, NavigationOption:{
+  Post:{screen:Post, NavigationOption:{
       label:'Profile',
 
     }},

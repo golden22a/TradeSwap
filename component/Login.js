@@ -23,7 +23,7 @@ export default class Login extends Component {
   }
   onPressButton(){
     console.log(this.state);
-  axios.post('https://calm-sierra-33982.herokuapp.com/auth/login',this.state).then((res)=>{
+  axios.post('http://127.0.0.1:3000/auth/login',this.state).then((res)=>{
     console.log(res);
 
 const hey=  AsyncStorage.setItem('token',res.data.token);
