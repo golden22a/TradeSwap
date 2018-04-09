@@ -11,13 +11,7 @@ By: Abdelhalim Khaldi
 2. Anyone who is looking to buy something.
 
 ## Data Model ERD
-User: email, password, firstname, lastname
-
-Product: user_id , title, description , images
-
-Orders: user_id, vendor_id, rating
-
-ERD: Users can have many Orders && Vendors can have many Orders
+![image of wireframe](images/tradewap.png “wireframe”)
 
 ## MVP
 User login
