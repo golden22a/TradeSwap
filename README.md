@@ -14,19 +14,23 @@ By: Abdelhalim Khaldi
 [image of wireframe](images/tradewap.png “wireframe”)
 
 ## MVP
-User login
+User login / SignUp
 
-Vendor Login
+User Post product
 
-Authorization
+User like or dislike a product
 
-Rating
+MAtches
+
 
 Validation
 
 ## Wireframes
 
+https://www.fluidui.com/editor/live/preview/cF9ScEJiM0I1VmtIWGNaWkhnS2ZGaVF0bjdINHhyTWlUVw==
 
+
+## Springs
 
 
 
