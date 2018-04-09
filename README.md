@@ -12,7 +12,7 @@ By: Abdelhalim Khaldi
 
 ## Data Model ERD
 
-![image of wireframe](images/tradewap.jpeg “wireframe”)
+![image of wireframe](images/tradeswap.png “wireframe”)
 
 ## MVP
 User login / SignUp
