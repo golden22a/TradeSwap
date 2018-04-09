@@ -11,7 +11,7 @@ By: Abdelhalim Khaldi
 2. Anyone who is looking to buy something.
 
 ## Data Model ERD
-[image of wireframe](images/tradewap.png “wireframe”)
+[image of wireframe](images/tradewap.jpeg “wireframe”)
 
 ## MVP
 User login / SignUp
