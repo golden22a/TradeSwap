@@ -5,36 +5,26 @@ import {
   Text,
   View,
   TouchableOpacity,
-  AsyncStorage,
   TextInput
 } from 'react-native';
 import axios from 'axios';
-export default class Login extends Component {
+export default class Home extends Component {
   constructor(props){
     super(props);
     this.state={
       email:'',
       password:'',
-      ok:true
     }
     this.onPressButton=this.onPressButton.bind(this);
-    this.test=this.test.bind(this)
 
   }
   onPressButton(){
     console.log(this.state);
   axios.post('https://calm-sierra-33982.herokuapp.com/auth/login',this.state).then((res)=>{
     console.log(res);
-
-const hey=  AsyncStorage.setItem('token',res.data.token);
-console.log(hey);
-  this.props.navigation.navigate('MainScreen',{user:res.data});
   }).catch((err)=>{
     console.log(err.response.data.message);
   });
-  }
-  test(){
-
   }
   render(){
 
@@ -51,14 +41,7 @@ console.log(hey);
       secureTextEntry={true} onChangeText={(text) => this.setState({password:text})}
       placeholder={'passowrd'}
     />
-    <TouchableOpacity style={styles.button} onPress={this.onPressButton}>
-      <Text style={styles.buttonText} >Login </Text>
-    </TouchableOpacity>
-    <Text>
-    dont have an accont ? <Text style={styles.link} onPress={()=>
-      this.props.navigation.navigate('HomeScreen',{test:this.test})
-      }> Sign up</Text>
-    </Text>
+
       </View>
     )
   }
@@ -67,7 +50,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor:"#0d47a1",
     alignItems: 'center'
   },
   textInput:{
@@ -92,9 +74,6 @@ const styles = StyleSheet.create({
     textAlign:'center',
     color:'#ffffff',
     fontSize:16
-  },
-  link:{
-    color:"blue"
   }
 
 });
