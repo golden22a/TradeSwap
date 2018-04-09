@@ -11,28 +11,34 @@ By: Abdelhalim Khaldi
 2. Anyone who is looking to buy something.
 
 ## Data Model ERD
-User: email, password, firstname, lastname
 
-Product: user_id , title, description , images
-
-Orders: user_id, vendor_id, rating
-
-ERD: Users can have many Orders && Vendors can have many Orders
+![image of wireframe](images/tradewap.jpeg “wireframe”)
 
 ## MVP
-User login
+User login / SignUp
 
-Vendor Login
+User Post product
 
-Authorization
+User like or dislike a product
 
-Rating
+MAtches
+
 
 Validation
 
 ## Wireframes
 
+https://www.fluidui.com/editor/live/preview/cF9ScEJiM0I1VmtIWGNaWkhnS2ZGaVF0bjdINHhyTWlUVw==
 
 
+## Springs
+
+#### Spring 1:
+-Learn about react native
+### Spring 2:
+-Setup a working environment on linux
+### Spring 3:
+- Create backend for basic auth
+- T
 
 
