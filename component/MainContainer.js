@@ -138,6 +138,8 @@ export default class Main extends Component{
     console.log('hey hey hey');
     PostModel.allPost(token).then((res)=>{
       console.log(res);
+    }).catch((err)=>{
+      console.log(err.response);
     })
   }
   Card(x){

@@ -3,7 +3,7 @@ class PostModel{
   static allPost(token){
     let req = axios({
     method: 'GET',
-    url: 'https://calm-sierra-33982.herokuapp.com/api/posts',
+    url: 'https://salty-brushlands-90707.herokuapp.com/api/posts',
     headers:{
       'Content-Type': 'application/x-www-form-urlencoded',
       'token':token
@@ -24,31 +24,17 @@ class PostModel{
      });
     return req;
   }
-  static cityPost(token,id){
-    let req = axios({
-    method: 'GET',
-    url: `https://calm-sierra-33982.herokuapp.com/api/city/${id}/posts`,
-    headers:{
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'token':token
-    }
 
-     });
-    return req;
-
-  }
   static postPost(token,post){
     console.log(post);
     let req = axios({
     method: 'post',
-    url: `https://calm-sierra-33982.herokuapp.com/api/post`,
+    url: `https://salty-brushlands-90707.herokuapp.com/api/lool`,
     headers:{
+      'Accept': 'application/json',
+      'Content-Type': 'multipart/form-data',
       'token':token
-    },data:{
-      title:post.title,
-      body:post.body,
-      city:post.city
-    }
+    },data:post
 
 
  });
