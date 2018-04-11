@@ -13,6 +13,7 @@ import {
   View,
   StatusBar,
   TouchableOpacity,
+  Alert,
   Image
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
@@ -75,16 +76,19 @@ export default class Main extends Component{
       connected:false,
       token:'',
       user:'',
-      cards:Cards
+      cards:[]
 
     }
     this.onLogin=this.onLogin.bind(this);
     this.notConnected=this.notConnected.bind(this);
     this.all=this.all.bind(this);
+    this.handleNope=this.handleNope.bind(this);
+    this.handleYup=this.handleYup.bind(this);
   }
   onLogin(props){
-    console.log('second');
+    console.log(this.props.navigation.state.params);
     if(this.props.navigation.state.params){
+
       let user=this.props.navigation.state.params.user
       this.setState({
         connected:true,
@@ -94,7 +98,8 @@ export default class Main extends Component{
         this.all(val);
       console.log(this.state);
 
-    }else{
+    }
+    else{
         console.log('hey');
       AsyncStorage.getItem('token').then((val)=>{
         console.log(val);
@@ -137,7 +142,21 @@ export default class Main extends Component{
   all(token){
     console.log('hey hey hey');
     PostModel.allPost(token).then((res)=>{
-      console.log(res);
+      console.log(res.data.posts);
+    let cards=res.data.posts.map((post)=>{
+      return {
+            'id':post._id,
+            "first_name":post.user.firstname,
+            "last_name":post.user.lastname,
+            'body':post.body,
+            "date":post.day_created,
+            'image':post.images[0]
+      }
+    })
+    this.setState({
+      cards:cards
+    });
+    console.log(cards);
     }).catch((err)=>{
       console.log(err.response);
     })
@@ -149,22 +168,35 @@ export default class Main extends Component{
         <View style={{width:350, height:70, flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
         <View style={{flexDirection:'row', margin:15, marginTop:25,}} >
         <Text style={{fontSize:20, fontWeight:'300', color:'white'}}>{x.first_name}, </Text>
-        <Text style={{fontSize:21, fontWeight:'200', color:'white'}}>{x.age}</Text>
+        <Text style={{fontSize:21, fontWeight:'200', color:'white'}}>{x.last_name}</Text>
         </View>
-        <View style={{flexDirection:'row'}}>
-        <View style={{padding:13,  borderLeftWidth:1,borderColor:'#e3e3e3', alignItems:'center', justifyContent:'space-between'}}><Icon name='people-outline' size={20} color="#777" style={{}} /><Text style={{fontSize:16, fontWeight:'200', color:'#555'}}>{x.friends}</Text></View>
-        <View style={{padding:13, borderLeftWidth:1,borderColor:'#e3e3e3', alignItems:'center', justifyContent:'space-between'}}><Icon name='import-contacts' size={20} color="#777" /><Text style={{fontSize:16, fontWeight:'200', color:'#555'}}>{x.interests}</Text></View>
+        <View style={styles.container}>
+        <Text >{x.body} </Text>
         </View>
         </View>
+
       </View>
     )
   }
     handleYup (card) {
-    console.log(`Yup for ${card.text}`)
+    console.log(card)
+    PostModel.postInterest(this.state.token,{item:card.id,interested:true}).then((res)=>{
+      console.log(res);
+    }).catch((err)=>{
+      console.log(err);
+    })
   }
 
   handleNope (card) {
-    console.log(`Nope for ${card.text}`)
+    console.log('heeere');
+    console.log(card);
+    PostModel.postInterest(this.state.token,{item:card.id,interested:false}).then((res)=>{
+      console.log(res);
+    }).catch((err)=>{
+      console.log(err);
+    })
+
+
   }
   noMore(){
     return (
@@ -175,16 +207,40 @@ export default class Main extends Component{
   }
 
   yup(){
-    console.log(this.refs['swiper'])
-this.refs['swiper']._goToNextCard()  }
+    card=this.refs['swiper'].state.card
+    PostModel.postInterest(this.state.token,{item:card.id,interested:true}).then((res)=>{
+        this.refs['swiper']._goToNextCard();
+        if(res.data.match){
+          let match=res.data.match
+          Alert.alert(
+          `Hey you matched with ${match.user2.firstname} ${match.user2.lastname} `,
+          `About item : ${match.item1.title}`,
+          [
+          {text: 'Message', onPress: () => this.props.navigation.navigate('Match')},
+          {text:'keep playing'}
+          ],
+          { cancelable: false }
+          )
+        }
+    }).catch((err)=>{
+      console.log(err);
+
+
+
+    })
+  }
 
 nope(){
-    console.log(this.refs['swiper'])
-this.refs['swiper']._goToNextCard()
+  card=this.refs['swiper'].state.card
+  PostModel.postInterest(this.state.token,{item:card.id,interested:false}).then((res)=>{
+    this.refs['swiper']._goToNextCard();
+  }).catch((err)=>{
+    console.log(err);
+  })
 }
 
   render() {
-    console.log(this.state)
+
   !this.state.connected ? this.onLogin() : null;
     return (
       <View style={styles.container}>

@@ -67,7 +67,23 @@ class PostModel{
  });
     return req;
   }
+
+  static postInterest(token,post){
+    console.log(post);
+    let req = axios({
+    method: 'post',
+    url: `https://salty-brushlands-90707.herokuapp.com/api/interest`,
+    headers:{
+      'token':token
+    },data:post
+
+
+ });
+    return req;
   }
+  }
+
+
 
 
 export default PostModel

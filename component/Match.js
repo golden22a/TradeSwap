@@ -8,8 +8,14 @@ import {
   TextInput
 } from 'react-native';
 import axios from 'axios';
-export default class MAtch extends Component {
+import SocketIOClient from 'socket.io-client';
 
+export default class MAtch extends Component {
+  constructor(props){
+    super(props);
+    this.socket=SocketIOClient('https://salty-brushlands-90707.herokuapp.com/');
+
+  }
   render(){
 
     return (

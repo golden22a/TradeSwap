@@ -5,16 +5,41 @@ import {
   Text,
   View,
   TouchableOpacity,
+  AsyncStorage,
   TextInput
 } from 'react-native';
 import axios from 'axios';
-export default class Setting extends Component {
+import { NavigationActions } from 'react-navigation';
 
+export default class Setting extends Component {
+  constructor(props){
+    super(props);
+    this.logout=this.logout.bind(this);
+  }
+  logout(){
+
+    AsyncStorage.removeItem('token').then((res)=>{
+        console.log('hey')
+      const resetAction = NavigationActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({ routeName: 'LoginScreen',
+        params:{onLogin:this.onLogin}})
+    ],
+
+
+      });
+      this.props.navigation.dispatch(resetAction);
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
   render(){
 
     return (
       <View style={styles.container}>
-
+      <TouchableOpacity style={styles.button} onPress={this.logout}>
+        <Text style={styles.buttonText} >Logout </Text>
+      </TouchableOpacity>
       </View>
     )
   }

@@ -71,7 +71,6 @@ export default class Post extends Component {
       multiple: true,
       width:300,
       height:300,
-      includeBase64:true,
       corp:true,
       mediaType:'photo'
             }).then(images => {
