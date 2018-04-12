@@ -2,25 +2,87 @@ import React, { Component } from 'react';
 import {
   Platform,
   StyleSheet,
-  Text,
+  AsyncStorage,
   View,
   TouchableOpacity,
   TextInput
 } from 'react-native';
+import { Container, Header, Content, Card, CardItem, Text, Body } from 'native-base';
 import axios from 'axios';
-import SocketIOClient from 'socket.io-client';
+import connect from '../auth/auth';
+import PostModel from '../model/Post';
+
 
 export default class MAtch extends Component {
   constructor(props){
     super(props);
-    this.socket=SocketIOClient('https://salty-brushlands-90707.herokuapp.com/');
-
+    this.state={
+      connected:false,
+      token:'',
+      user:'',
+      matches:[]
+    }
+    this.all=this.all.bind(this);
+    console.log(this.state);
   }
-  render(){
+  componentWillMount(){
+    AsyncStorage.getItem('token').then((val)=>{
+      console.log(val);
+      connect.islogged(val).then((response)=>{
+        this.setState({
+          connected:true,
+          token:val,
+          user:response.data.user
+        });
+        console.log(this.state);
 
+        this.all(val);
+      }).catch((error) =>{
+        console.log('no');
+        console.log(error);
+        AsyncStorage.removeItem('token');
+
+
+      });
+  }).catch((error)=>{
+    console.log('no no')
+
+    AsyncStorage.removeItem('token');
+
+
+  });
+}
+all(token){
+  console.log('okay1');
+  PostModel.matches(token).then((res)=>{
+    console.log(res.data.matches);
+    this.setState({
+      matches:res.data.matches
+    })
+  }).catch((err)=>{
+    console.log(err.response);
+  })
+}
+  render(){
+    let card=this.state.matches.map((match)=>{
+    return  ( <Container key={match._id}>
+
+       <Content>
+         <Card>
+           <CardItem button onPress={() => this.props.navigation.navigate('Conversation',{token:this.state.token,user:this.state.user,match:match})}>
+             <Body>
+               <Text>
+               {match.title}
+              </Text>
+             </Body>
+           </CardItem>
+         </Card>
+       </Content>
+     </Container> )
+    })
     return (
       <View style={styles.container}>
-
+      {card}
       </View>
     )
   }
@@ -28,8 +90,7 @@ export default class MAtch extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+        backgroundColor:"#0d47a1"
   },
   textInput:{
     width:300,

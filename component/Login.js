@@ -15,7 +15,8 @@ export default class Login extends Component {
     this.state={
       email:'',
       password:'',
-      ok:true
+      res:'',
+      connected:false
     }
     this.onPressButton=this.onPressButton.bind(this);
     this.test=this.test.bind(this)
@@ -28,6 +29,11 @@ export default class Login extends Component {
 
 const hey=  AsyncStorage.setItem('token',res.data.token);
 console.log(hey);
+  this.setState({
+    res:res.data,
+    connected:true
+  })
+  console.log(this.state);
   this.props.navigation.navigate('MainScreen',{user:res.data});
   }).catch((err)=>{
     console.log(err.response.data.message);
@@ -37,7 +43,7 @@ console.log(hey);
 
   }
   render(){
-
+    console.log(this.props.navigation);
     return (
       <View style={styles.container}>
 

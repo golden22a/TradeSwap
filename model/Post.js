@@ -81,6 +81,30 @@ class PostModel{
  });
     return req;
   }
+  static matches(token){
+    let req = axios({
+    method: 'GET',
+    url: 'https://salty-brushlands-90707.herokuapp.com/api/matches',
+    headers:{
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'token':token
+    }
+
+     });
+    return req;
+  }
+  static matchMessages(token,id){
+    let req = axios({
+    method: 'GET',
+    url: `https://salty-brushlands-90707.herokuapp.com/api/match/${id._id}/messages`,
+    headers:{
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'token':token
+    }
+
+     });
+    return req;
+  }
   }
 
 

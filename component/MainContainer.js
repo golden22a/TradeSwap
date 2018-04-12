@@ -24,49 +24,7 @@ import SwipeCards from 'react-native-swipe-cards';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Iconz from 'react-native-vector-icons/Ionicons';
 type Props = {};
-const Cards = [{
-  "id": 1,
-  "first_name": "Denise",
-  "age": 21,
-  "friends": 9,
-  "interests": 38,
-  "image": 'http://digitalspyuk.cdnds.net/16/07/980x490/landscape-1455888469-ps4-console-wds4.jpg'
-}, {
-  "id": 2,
-  "first_name": "Cynthia",
-  "age": 27,
-  "friends": 16,
-  "interests": 49,
-  "image": 'https://cdn.shopify.com/s/files/1/1520/4366/files/13_SATECHI_INSTAGRAM_04-06_spacegray_setup_webKlaviyo_1024x1024.jpg?v=1503341248'
-}, {
-  "id": 3,
-  "first_name": "Maria",
-  "age": 29,
-  "friends": 2,
-  "interests": 39,
-  "image": 'https://cdn3.volusion.com/lcseg.xtstx/v/vspfiles/photos/categories/338-T.jpg?1469627871'
-}, {
-  "id": 4,
-  "first_name": "Jessica",
-  "age": 20,
-  "friends": 18,
-  "interests": 50,
-  "image": 'https://media1.popsugar-assets.com/files/thumbor/1QXPFzwSNNpDE3pYsrKL0vBDvw4/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2010/12/51/1/192/1922507/9969c2b4479db1d1_GadgetGiftsMain/i/Top-10-Gadget-Items-You-Want-Holiday.jpg'
-}, {
-  "id": 5,
-  "first_name": "Julie",
-  "age": 28,
-  "friends": 2,
-  "interests": 13,
-  "image": 'https://images.pcworld.com/images/article/2012/01/pricesup-8965886.jpg'
-}, {
-  "id": 6,
-  "first_name": "Anna",
-  "age": 24,
-  "friends": 12,
-  "interests": 44,
-  "image": 'https://www.theallineed.com/wp-content/uploads/2017/03/Small-business-office.jpg'
-}]
+
 export default class Main extends Component{
   constructor(props){
     console.log('first');
@@ -148,6 +106,7 @@ export default class Main extends Component{
             'id':post._id,
             "first_name":post.user.firstname,
             "last_name":post.user.lastname,
+            'title':post.title,
             'body':post.body,
             "date":post.day_created,
             'image':post.images[0]
@@ -167,8 +126,8 @@ export default class Main extends Component{
         <Image source ={{uri:x.image}} resizeMode="contain" style ={{width:350, height:350}} />
         <View style={{width:350, height:70, flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
         <View style={{flexDirection:'row', margin:15, marginTop:25,}} >
-        <Text style={{fontSize:20, fontWeight:'300', color:'white'}}>{x.first_name}, </Text>
-        <Text style={{fontSize:21, fontWeight:'200', color:'white'}}>{x.last_name}</Text>
+          <Text style={{fontSize:20, fontWeight:'300', color:'white'}}>{x.first_name}, {x.last_name}</Text>
+        <Text style={{fontSize:21, fontWeight:'200', color:'white'}}>{x.title}</Text>
         </View>
         <View style={styles.container}>
         <Text >{x.body} </Text>
@@ -182,6 +141,18 @@ export default class Main extends Component{
     console.log(card)
     PostModel.postInterest(this.state.token,{item:card.id,interested:true}).then((res)=>{
       console.log(res);
+      if(res.data.match){
+        let match=res.data.match
+        Alert.alert(
+        `Hey you matched with ${match.user2.firstname} ${match.user2.lastname} `,
+        `About item : ${match.item1.title}`,
+        [
+        {text: 'Message', onPress: () => this.props.navigation.navigate('Match')},
+        {text:'keep playing'}
+        ],
+        { cancelable: false }
+        )
+      }
     }).catch((err)=>{
       console.log(err);
     })

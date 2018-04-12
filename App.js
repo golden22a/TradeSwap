@@ -19,6 +19,7 @@ import Post from './component/Post';
 import Home from './component/Home';
 import Main from './component/MainContainer';
 import CardContainer from './component/CardContainer';
+import Conversation from './component/Conversation';
 import Explore from './component/Explore';
 import LikedMe from './component/LikedMe';
 import Iliked from './component/Iliked';
@@ -48,6 +49,13 @@ export default class App extends Component<Props> {
     );
   }
 }
+
+export const MatchNavigation=StackNavigator({
+    Match:{screen:Match},
+    Conversation:{screen:Conversation}
+},{
+  headerMode:'none'
+})
 export const LikeTab=TabNavigator({
   Iliked:{
     screen:Iliked
@@ -98,15 +106,23 @@ export const Tabs=TabNavigator({
   }
 
   });
+
 export const AppNavigator=StackNavigator({
+
   LoginScreen:{ screen: Login},
   HomeScreen:{screen :Home},
+      Conversation:{screen:Conversation}
+
+
+
+
 },{
   headerMode:'none'
 });
 export const MainNavigation=SwitchNavigator({
   MainScreen:{screen: Tabs},
-  signScreen: {screen: AppNavigator}
+  signScreen: {screen: AppNavigator},
+
 
 })
 const styles = StyleSheet.create({
