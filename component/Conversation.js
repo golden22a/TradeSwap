@@ -53,26 +53,46 @@ this.receive();
     console.log(this.state.match._id.toString());
     this.socket.on(this.state.match._id.toString(),(message)=>{
       console.log(message);
+      let messages=this.state.messages;
+      messages.push(message)
+      this.setState({
+        messages:messages
+      })
+      console.log(this.state);
     })
   }
   render(){
-
+    let messages=this.state.messages.map((message)=>{
+      let layout={fontSize: 20,
+    fontWeight: 'bold',
+  color:'green',
+  textAlign:'left'}
+      if(message.user.toString() == this.state.user._id.toString())
+      layout={fontSize: 20,
+    fontWeight: 'bold',
+  color:'blue',
+  textAlign:'right'}
+      return (<Text key={message._id} style={layout} >{message.body}</Text>)
+    })
     return (
       <View style={styles.container}>
-      <View>
+      <View style={styles.messages}>
+      {messages}
       </View>
-      <View>
-      <Container>
-       <Content style={styles.row}>
+      <View style={styles.row}>
+      <Container style={styles.okay}>
+       <Content >
          <Item regular >
            <Input placeholder='text here' style={styles.textInput}   onChangeText={(text) => this.setState({message:text})}/>
 
          </Item>
-         <Button onPress={() => this.send() }>
-          <Text> Click Me! </Text>
-        </Button>
+
        </Content>
+
      </Container>
+     <Button style={styles.button} onPress={() => this.send() }>
+      <Text> Click Me! </Text>
+    </Button>
       </View>
       </View>
     )
@@ -81,25 +101,20 @@ this.receive();
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
   },
   textInput:{
-    width:300,
     backgroundColor:'rgba(255, 255,255,0.2)',
-    paddingHorizontal:16,
-    fontSize:16,
-    color:'black',
-    marginVertical: 10
+    color:'black'
+
 
   },
+  okay:{
+      flex:3
+  },
   button:{
-    width:200,
-    height:30,
-    marginVertical:10,
-    paddingVertical:2,
-    backgroundColor:'#303f9f',
-    borderRadius:25,
+  flex:1
+
+
   },
   buttonText:{
     textAlign:'center',
@@ -108,8 +123,15 @@ const styles = StyleSheet.create({
   },
   row:{
     flex:1,
-    flexDirection:'row'
+    flexDirection:'row',
+    justifyContent:'space-between',
 
+
+
+
+  },
+  messages:{
+    flex:9
   }
 
 });
