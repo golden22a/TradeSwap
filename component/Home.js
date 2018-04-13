@@ -16,7 +16,8 @@ export default class Home extends Component {
       email:'',
       password:'',
       firstname:'',
-      lastname:''
+      lastname:'',
+      error:{}
     }
     this.onPressButton=this.onPressButton.bind(this);
 
@@ -29,7 +30,10 @@ export default class Home extends Component {
     this.props.navigation.navigate('MainScreen',{user:res.data});
 
   }).catch((err)=>{
-    console.log(err.response.data.message);
+    console.log(err.response.data);
+    this.setState({
+      error:err.response.data.errors
+    })
   });
   }
   render(){
@@ -40,26 +44,50 @@ export default class Home extends Component {
 
     <TextInput
     style={styles.textInput} underlineColorAndroid='rgba(0,0,0,0)'
-     onChangeText={(text) => this.setState({firstname:text})}
+     onChangeText={(text) => {
+       let error=this.state.error;
+       error.firstname=''
+       this.setState({firstname:text ,error:error})
+     }}
     placeholder={'firstname'}
   />
+  <Text style={{color:'red'}}>{this.state.error.firstname}</Text>
   <TextInput
   style={styles.textInput} underlineColorAndroid='rgba(0,0,0,0)'
-   onChangeText={(text) => this.setState({lastname:text})}
+   onChangeText={(text) =>
+     {
+       let error=this.state.error;
+       error.lastname=''
+     this.setState({lastname:text,error:error})
+   }}
   placeholder={'lastname'}
 />
+<Text style={{color:'red'}}>{this.state.error.lastname}</Text>
+
 <TextInput
 style={styles.textInput} underlineColorAndroid='rgba(0,0,0,0)'
-onChangeText={(text) => this.setState({email:text})}
+onChangeText={(text) => {
+  let error=this.state.error;
+  error.email=''
+  this.setState({email:text,error:error})
+}}
 placeholder={'Email'}
 />
+<Text style={{color:'red'}}>{this.state.error.email}</Text>
+
 <TextInput
 style={styles.textInput} underlineColorAndroid='rgba(0,0,0,0)'
-secureTextEntry={true} onChangeText={(text) => this.setState({password:text})}
+secureTextEntry={true} onChangeText={(text) => {
+  let error=this.state.error;
+  error.password=''
+  this.setState({password:text,error:error})
+}}
 placeholder={'passowrd'}
 />
+<Text style={{color:'red'}}>{this.state.error.password}</Text>
+
     <TouchableOpacity style={styles.button} onPress={this.onPressButton}>
-      <Text style={styles.buttonText} >Login </Text>
+      <Text style={styles.buttonText} >Signup </Text>
     </TouchableOpacity>
 
       </View>

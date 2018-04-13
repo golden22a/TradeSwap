@@ -16,6 +16,7 @@ export default class Login extends Component {
       email:'',
       password:'',
       res:'',
+      error:'',
       connected:false
     }
     this.onPressButton=this.onPressButton.bind(this);
@@ -36,25 +37,28 @@ console.log(hey);
   console.log(this.state);
   this.props.navigation.navigate('MainScreen',{user:res.data});
   }).catch((err)=>{
-    console.log(err.response.data.message);
+    console.log(err.response.data);
+    this.setState({
+      error:err.response.data.message
+    })
   });
   }
   test(){
 
   }
   render(){
-    console.log(this.props.navigation);
+
     return (
       <View style={styles.container}>
 
         <TextInput
         style={styles.textInput} underlineColorAndroid='rgba(0,0,0,0)'
-        onChangeText={(text) => this.setState({email:text})}
+        onChangeText={(text) => this.setState({email:text,error:''})}
         placeholder={'Email'}
       />
       <TextInput
       style={styles.textInput} underlineColorAndroid='rgba(0,0,0,0)'
-      secureTextEntry={true} onChangeText={(text) => this.setState({password:text})}
+      secureTextEntry={true} onChangeText={(text) => this.setState({password:text,error:''})}
       placeholder={'passowrd'}
     />
     <TouchableOpacity style={styles.button} onPress={this.onPressButton}>
@@ -65,6 +69,7 @@ console.log(hey);
       this.props.navigation.navigate('HomeScreen',{test:this.test})
       }> Sign up</Text>
     </Text>
+    <Text style={{color:'red'}}> {this.state.error}</Text>
       </View>
     )
   }
