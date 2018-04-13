@@ -33,7 +33,7 @@ export default class Home extends Component {
   }).catch((err)=>{
     console.log(err.response.data);
     this.setState({
-      error:err.response.data.errors || {},
+      error:err.response.data.errors || {email:'email already exists'},
       message:err.response.data.message
     })
   });

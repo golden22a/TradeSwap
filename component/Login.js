@@ -42,7 +42,7 @@ console.log(hey);
   }).catch((err)=>{
     console.log(err.response.data);
     this.setState({
-      error:err.response.data.errors || {email:'email already exists'},
+      error:err.response.data.errors || {},
       message:err.response.data.message
     })
   });
