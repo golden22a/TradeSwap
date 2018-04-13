@@ -6,6 +6,7 @@ import {
   AsyncStorage,
   Image,
   TouchableOpacity,
+  ScrollView,
   TextInput
 } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body } from 'native-base';
@@ -61,10 +62,11 @@ export default class Ipassed extends Component {
 
 
         <Content key={card._id}>
-          <Card style={{flex: 0}}>
+          <Card style={{margin:10}}>
             <CardItem>
               <Left>
                 <Body>
+                  <Text>{card.item.user.firstname} {card.item.user.lastname}</Text>
                   <Text>{card.item.title}</Text>
                   <Text note>{card.item.day_created}</Text>
                 </Body>
@@ -87,9 +89,12 @@ export default class Ipassed extends Component {
     })
     return (
       <View style={styles.container}>
+      <ScrollView contentContainerStyle={{ paddingVertical: 20,minHeight: 2000 }}>
+
           <Container >
       {liked}
       </Container>
+      </ScrollView>
       </View>
     )
   }

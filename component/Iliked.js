@@ -5,6 +5,7 @@ import {
   View,
   AsyncStorage,
   Image,
+  ScrollView,
   TouchableOpacity,
   TextInput
 } from 'react-native';
@@ -65,6 +66,7 @@ export default class Iliked extends Component {
             <CardItem>
               <Left>
                 <Body>
+                  <Text>{card.item.user.firstname} {card.item.user.lastname}</Text>
                   <Text>{card.item.title}</Text>
                   <Text note>{card.item.day_created}</Text>
                 </Body>
@@ -87,9 +89,12 @@ export default class Iliked extends Component {
     })
     return (
       <View style={styles.container}>
+      <ScrollView contentContainerStyle={{ paddingVertical: 20,minHeight: 2000 }}>
+
           <Container >
       {liked}
       </Container>
+      </ScrollView>
       </View>
     )
   }

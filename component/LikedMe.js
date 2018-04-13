@@ -6,6 +6,7 @@ import {
   AsyncStorage,
   Image,
   TouchableOpacity,
+  ScrollView,
   TextInput
 } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body } from 'native-base';
@@ -88,10 +89,13 @@ export default class LikedMe extends Component {
     })
     return (
       <View style={styles.container}>
+      <ScrollView contentContainerStyle={{ paddingVertical: 20,minHeight: 2000 }}>
           <Container >
       {liked}
       </Container>
+        </ScrollView>
       </View>
+
     )
   }
   }
