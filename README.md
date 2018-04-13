@@ -12,7 +12,7 @@ By: Abdelhalim Khaldi
 
 ## Data Model ERD
 
-![image of wireframe](https://github.com/golden22a/TradeSwap/images/tradewap.jpeg “wireframe”)
+![image of wireframe](https://github.com/golden22a/TradeSwap/blob/dev/images/ERD.png "wireframe")
 
 ## MVP
 User login / SignUp
@@ -39,6 +39,6 @@ https://www.fluidui.com/editor/live/preview/cF9ScEJiM0I1VmtIWGNaWkhnS2ZGaVF0bjdI
 -Setup a working environment on linux
 ### Spring 3:
 - Create backend for basic auth
-- T
+- Token auth
 
 
