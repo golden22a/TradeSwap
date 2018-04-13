@@ -47,4 +47,14 @@ https://www.fluidui.com/editor/live/preview/cF9ScEJiM0I1VmtIWGNaWkhnS2ZGaVF0bjdI
 - Create backend for basic auth
 - Token auth
 
+## Challenges :
 
+- Setting up a working environment on linux
+
+_   React Native in general
+
+-  Using relational conditions in a non relational db to filter data
+
+## Code :
+
+![image of WIREFRAMES](https://github.com/golden22a/TradeSwap/blob/dev/images/code.png "wireframe")
