@@ -65,24 +65,32 @@ all(token){
 }
   render(){
     let card=this.state.matches.map((match)=>{
-    return  ( <Container key={match._id}>
+    return  (
 
-       <Content>
-         <Card>
-           <CardItem button onPress={() => this.props.navigation.navigate('Conversation',{token:this.state.token,user:this.state.user,match:match})}>
-             <Body>
-               <Text>
-               {match.title}
-              </Text>
-             </Body>
-           </CardItem>
-         </Card>
-       </Content>
-     </Container> )
+        <Card  key={match._id}>
+        <CardItem style={{margin:10}}   button onPress={() => this.props.navigation.navigate('Conversation',{token:this.state.token,user:this.state.user,match:match})}>
+          <Body>
+            <Text>
+            {match.title}
+           </Text>
+          </Body>
+             </CardItem>
+             </Card>
+
+     )
     })
     return (
       <View style={styles.container}>
-      {card}
+      <Container >
+      <Content >
+
+
+         {card}
+
+
+         </Content>
+     </Container>
+
       </View>
     )
   }

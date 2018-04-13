@@ -25,7 +25,7 @@ class PostModel{
     return req;
   }
 
-  static postPost(token,post){
+  static postPost(token,post,){
     console.log(post);
     let req = axios({
     method: 'post',

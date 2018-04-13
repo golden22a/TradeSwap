@@ -116,7 +116,7 @@ this.state.images.forEach((image)=>{
 formData.append('title',this.state.title);
 formData.append('body',this.state.body);
 
-  PostModel.postPost(this.state.token,formData).then((res)=>{
+    PostModel.postPost(this.state.token,formData).then((res)=>{
       Alert.alert(
   'Post',
   'Item Posted great',

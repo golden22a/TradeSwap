@@ -67,6 +67,7 @@ export default class Home extends Component {
 <Text style={{color:'red'}}>{this.state.error.lastname}</Text>
 
 <TextInput
+  autoCapitalize='none'
 style={styles.textInput} underlineColorAndroid='rgba(0,0,0,0)'
 onChangeText={(text) => {
   let error=this.state.error;
@@ -78,6 +79,7 @@ placeholder={'Email'}
 <Text style={{color:'red'}}>{this.state.error.email}</Text>
 
 <TextInput
+  autoCapitalize='none'
 style={styles.textInput} underlineColorAndroid='rgba(0,0,0,0)'
 secureTextEntry={true} onChangeText={(text) => {
   let error=this.state.error;

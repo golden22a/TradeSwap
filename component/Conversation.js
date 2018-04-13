@@ -69,7 +69,7 @@ this.receive();
     })
   }
   render(){
-    let messages=this.state.messages.slice(-24).map((message)=>{
+    let messages=this.state.messages.slice(-20).map((message)=>{
       let layout={fontSize: 20,
     fontWeight: 'bold',
   color:'green',

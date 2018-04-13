@@ -124,13 +124,14 @@ export default class Main extends Component{
     return (
       <View style={styles.card}>
         <Image source ={{uri:x.image}} resizeMode="contain" style ={{width:350, height:350}} />
-        <View style={{width:350, height:70, flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
-        <View style={{flexDirection:'row', margin:15, marginTop:25,}} >
+        <View style={{width:350, height:70,  alignItems:'center', justifyContent:'space-between'}}>
+        <View style={{flexDirection:'row',justifyContent:'space-between', margin:15, marginTop:25,}} >
           <Text style={{fontSize:20, fontWeight:'300', color:'white'}}>{x.first_name}, {x.last_name}</Text>
-        <Text style={{fontSize:21, fontWeight:'200', color:'white'}}>{x.title}</Text>
+<Text style={{fontSize:21, fontWeight:'200', color:'white'}}> {x.title}</Text>
         </View>
         <View style={styles.container}>
-        <Text >{x.body} </Text>
+
+        <Text style={{fontSize:12, fontWeight:'200', color:'white'}}>{x.body} </Text>
         </View>
         </View>
 
@@ -218,7 +219,7 @@ nope(){
       <SwipeCards
         ref = {'swiper'}
         cards={this.state.cards}
-        containerStyle = {{  backgroundColor: '#f7f7f7', alignItems:'center', margin:20}}
+        containerStyle = {{  backgroundColor: '#303f9f', alignItems:'center', margin:20}}
         renderCard={(cardData) => this.Card(cardData)}
         renderNoMoreCards={() => this.noMore()}
         handleYup={this.handleYup}
@@ -240,8 +241,7 @@ nope(){
 }
 const styles = StyleSheet.create({
   container : {
-    flex: 1,
-    backgroundColor:"#0d47a1"
+    flex: 1
   },
   buttons:{
     width:80,

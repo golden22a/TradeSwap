@@ -6,6 +6,7 @@ import {
   View,
   TouchableOpacity,
   AsyncStorage,
+  Image,
   TextInput
 } from 'react-native';
 import axios from 'axios';
@@ -24,6 +25,7 @@ export default class Login extends Component {
     this.test=this.test.bind(this)
 
   }
+
   onPressButton(){
     console.log(this.state);
   axios.post('https://salty-brushlands-90707.herokuapp.com/auth/login',this.state).then((res)=>{
@@ -49,11 +51,12 @@ console.log(hey);
 
   }
   render(){
-
     return (
       <View style={styles.container}>
+      <Image source={require('./icon.png')} style={{height:200 ,width:200 ,paddingBottom:10}} />
 
         <TextInput
+          autoCapitalize='none'
         style={styles.textInput} underlineColorAndroid='rgba(0,0,0,0)'
         onChangeText={(text) => {
           let error=this.state.error;
@@ -65,6 +68,7 @@ console.log(hey);
       <Text style={{color:'red'}}>{this.state.error.email}</Text>
 
       <TextInput
+      autoCapitalize='none'
       style={styles.textInput} underlineColorAndroid='rgba(0,0,0,0)'
       secureTextEntry={true} onChangeText={(text) =>{
         let error=this.state.error;
