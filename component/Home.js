@@ -17,6 +17,7 @@ export default class Home extends Component {
       password:'',
       firstname:'',
       lastname:'',
+      message:'',
       error:{}
     }
     this.onPressButton=this.onPressButton.bind(this);
@@ -32,7 +33,8 @@ export default class Home extends Component {
   }).catch((err)=>{
     console.log(err.response.data);
     this.setState({
-      error:err.response.data.errors
+      error:err.response.data.errors || {},
+      message:err.response.data.message
     })
   });
   }
@@ -47,7 +49,7 @@ export default class Home extends Component {
      onChangeText={(text) => {
        let error=this.state.error;
        error.firstname=''
-       this.setState({firstname:text ,error:error})
+       this.setState({firstname:text ,error:error,message:''})
      }}
     placeholder={'firstname'}
   />
@@ -58,7 +60,7 @@ export default class Home extends Component {
      {
        let error=this.state.error;
        error.lastname=''
-     this.setState({lastname:text,error:error})
+     this.setState({lastname:text,error:error,message:''})
    }}
   placeholder={'lastname'}
 />
@@ -69,7 +71,7 @@ style={styles.textInput} underlineColorAndroid='rgba(0,0,0,0)'
 onChangeText={(text) => {
   let error=this.state.error;
   error.email=''
-  this.setState({email:text,error:error})
+  this.setState({email:text,error:error,message:''})
 }}
 placeholder={'Email'}
 />
@@ -80,15 +82,16 @@ style={styles.textInput} underlineColorAndroid='rgba(0,0,0,0)'
 secureTextEntry={true} onChangeText={(text) => {
   let error=this.state.error;
   error.password=''
-  this.setState({password:text,error:error})
+  this.setState({password:text,error:error,message:''})
 }}
 placeholder={'passowrd'}
 />
 <Text style={{color:'red'}}>{this.state.error.password}</Text>
 
     <TouchableOpacity style={styles.button} onPress={this.onPressButton}>
-      <Text style={styles.buttonText} >Signup </Text>
+      <Text style={styles.buttonText} >SignUp </Text>
     </TouchableOpacity>
+    <Text style={{color:'red'}}>{this.state.message}</Text>
 
       </View>
     )

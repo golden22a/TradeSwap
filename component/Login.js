@@ -16,7 +16,8 @@ export default class Login extends Component {
       email:'',
       password:'',
       res:'',
-      error:'',
+      error:{},
+      message:'',
       connected:false
     }
     this.onPressButton=this.onPressButton.bind(this);
@@ -39,7 +40,8 @@ console.log(hey);
   }).catch((err)=>{
     console.log(err.response.data);
     this.setState({
-      error:err.response.data.message
+      error:err.response.data.errors || {email:'email already exists'},
+      message:err.response.data.message
     })
   });
   }
@@ -53,14 +55,26 @@ console.log(hey);
 
         <TextInput
         style={styles.textInput} underlineColorAndroid='rgba(0,0,0,0)'
-        onChangeText={(text) => this.setState({email:text,error:''})}
+        onChangeText={(text) => {
+          let error=this.state.error;
+          error.email=''
+          this.setState({email:text,message:'',error:error})
+      }}
         placeholder={'Email'}
       />
+      <Text style={{color:'red'}}>{this.state.error.email}</Text>
+
       <TextInput
       style={styles.textInput} underlineColorAndroid='rgba(0,0,0,0)'
-      secureTextEntry={true} onChangeText={(text) => this.setState({password:text,error:''})}
+      secureTextEntry={true} onChangeText={(text) =>{
+        let error=this.state.error;
+        error.password=''
+        this.setState({password:text,message:'',error:error})
+    }}
       placeholder={'passowrd'}
     />
+    <Text style={{color:'red'}}>{this.state.error.password}</Text>
+
     <TouchableOpacity style={styles.button} onPress={this.onPressButton}>
       <Text style={styles.buttonText} >Login </Text>
     </TouchableOpacity>
@@ -69,7 +83,7 @@ console.log(hey);
       this.props.navigation.navigate('HomeScreen',{test:this.test})
       }> Sign up</Text>
     </Text>
-    <Text style={{color:'red'}}> {this.state.error}</Text>
+    <Text style={{color:'red'}}> {this.state.message}</Text>
       </View>
     )
   }
@@ -105,7 +119,7 @@ const styles = StyleSheet.create({
     fontSize:16
   },
   link:{
-    color:"blue"
+    color:"white"
   }
 
 });
