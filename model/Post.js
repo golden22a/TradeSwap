@@ -105,6 +105,47 @@ class PostModel{
      });
     return req;
   }
+  static Iliked(token){
+    let req = axios({
+    method: 'GET',
+    url: `https://salty-brushlands-90707.herokuapp.com/api/interest/liked`,
+    headers:{
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'token':token
+    }
+
+     });
+    return req;
+
+  }
+  static LikedMe(token){
+    let req = axios({
+    method: 'GET',
+    url: `https://salty-brushlands-90707.herokuapp.com/api/interest/likedme`,
+    headers:{
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'token':token
+    }
+
+     });
+    return req;
+
+  }
+  static Ipassed(token){
+    let req = axios({
+    method: 'GET',
+    url: `https://salty-brushlands-90707.herokuapp.com/api/interest/passed`,
+    headers:{
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'token':token
+    }
+
+     });
+    return req;
+
+  }
+
+
   }
 
 

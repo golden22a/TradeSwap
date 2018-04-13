@@ -4,6 +4,9 @@ import {
   StyleSheet,
   View,
   TouchableOpacity,
+  Keyboard,
+  ScrollView,
+  KeyboardAvoidingView,
   TextInput
 } from 'react-native';
 import axios from 'axios';
@@ -48,6 +51,8 @@ this.receive();
       match:this.state.match,
       body:this.state.message
     });
+    Keyboard.dismiss();
+
   }
   receive(){
     console.log(this.state.match._id.toString());
@@ -56,13 +61,15 @@ this.receive();
       let messages=this.state.messages;
       messages.push(message)
       this.setState({
-        messages:messages
+        messages:messages,
+        message:''
       })
       console.log(this.state);
+
     })
   }
   render(){
-    let messages=this.state.messages.map((message)=>{
+    let messages=this.state.messages.slice(-24).map((message)=>{
       let layout={fontSize: 20,
     fontWeight: 'bold',
   color:'green',
@@ -75,15 +82,17 @@ this.receive();
       return (<Text key={message._id} style={layout} >{message.body}</Text>)
     })
     return (
-      <View style={styles.container}>
+      <View style={styles.container} >
       <View style={styles.messages}>
+      <ScrollView contentContainerStyle={{flex:1}}>
       {messages}
+      </ScrollView>
       </View>
       <View style={styles.row}>
       <Container style={styles.okay}>
        <Content >
          <Item regular >
-           <Input placeholder='text here' style={styles.textInput}   onChangeText={(text) => this.setState({message:text})}/>
+           <Input placeholder='text here' style={styles.textInput}  value={this.state.message}  onChangeText={(text) => this.setState({message:text})}/>
 
          </Item>
 
@@ -100,7 +109,7 @@ this.receive();
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   textInput:{
     backgroundColor:'rgba(255, 255,255,0.2)',

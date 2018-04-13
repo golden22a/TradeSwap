@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Text,
   View,
+  AsyncStorage,
   TouchableOpacity,
   TextInput
 } from 'react-native';
@@ -14,14 +15,19 @@ export default class Home extends Component {
     this.state={
       email:'',
       password:'',
+      firstname:'',
+      lastname:''
     }
     this.onPressButton=this.onPressButton.bind(this);
 
   }
   onPressButton(){
     console.log(this.state);
-  axios.post('https://calm-sierra-33982.herokuapp.com/auth/login',this.state).then((res)=>{
+  axios.post('https://salty-brushlands-90707.herokuapp.com/auth/signup',this.state).then((res)=>{
     console.log(res);
+    AsyncStorage.setItem('token',res.data.token);
+    this.props.navigation.navigate('MainScreen',{user:res.data});
+
   }).catch((err)=>{
     console.log(err.response.data.message);
   });
@@ -31,16 +37,30 @@ export default class Home extends Component {
     return (
       <View style={styles.container}>
 
-        <TextInput
-        style={styles.textInput} underlineColorAndroid='rgba(0,0,0,0)'
-        onChangeText={(text) => this.setState({email:text})}
-        placeholder={'Email'}
-      />
-      <TextInput
-      style={styles.textInput} underlineColorAndroid='rgba(0,0,0,0)'
-      secureTextEntry={true} onChangeText={(text) => this.setState({password:text})}
-      placeholder={'passowrd'}
-    />
+
+    <TextInput
+    style={styles.textInput} underlineColorAndroid='rgba(0,0,0,0)'
+     onChangeText={(text) => this.setState({firstname:text})}
+    placeholder={'firstname'}
+  />
+  <TextInput
+  style={styles.textInput} underlineColorAndroid='rgba(0,0,0,0)'
+   onChangeText={(text) => this.setState({lastname:text})}
+  placeholder={'lastname'}
+/>
+<TextInput
+style={styles.textInput} underlineColorAndroid='rgba(0,0,0,0)'
+onChangeText={(text) => this.setState({email:text})}
+placeholder={'Email'}
+/>
+<TextInput
+style={styles.textInput} underlineColorAndroid='rgba(0,0,0,0)'
+secureTextEntry={true} onChangeText={(text) => this.setState({password:text})}
+placeholder={'passowrd'}
+/>
+    <TouchableOpacity style={styles.button} onPress={this.onPressButton}>
+      <Text style={styles.buttonText} >Login </Text>
+    </TouchableOpacity>
 
       </View>
     )
@@ -58,7 +78,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     paddingHorizontal:16,
     fontSize:16,
-    color:'#ffffff',
+    color:'black',
     marginVertical: 10
 
   },
